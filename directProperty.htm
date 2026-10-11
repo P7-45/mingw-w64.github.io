@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DirectProperty - </title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+        }
+
+        header {
+            background: #12355b;
+            color: white;
+            padding: 18px 30px;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: #ffd166;
+        }
+
+        .hero {
+            background: linear-gradient(
+                rgba(18, 53, 91, 0.9),
+                rgba(18, 53, 91, 0.9)
+            ),
+            url("https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1600&q=80");
+
+            background-size: cover;
+            background-position: center;
+
+            min-height: 500px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 40px 20px;
+        }
+
+        .hero-content {
+            width: 100%;
+            max-width: 1000px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 19px;
+            margin-bottom: 30px;
+        }
+
+        .search-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-box select,
+        .search-box input {
+            padding: 13px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .search-btn {
+            background: #ffd166;
+            color: #12355b;
+            border: none;
+            padding: 13px 22px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .search-btn:hover {
+            background: #f4bd42;
+        }
+
+        .section {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #12355b;
+            font-size: 30px;
+            margin-bottom: 30px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .card img {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-content {
+            padding: 18px;
+            text-align: center;
+        }
+
+        .card-content h3 {
+            color: #12355b;
+            margin-bottom: 10px;
+        }
+
+        .card-content p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .card-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #12355b;
+            color: white;
+            padding: 9px 16px;
+            border-radius: 6px;
+        }
+
+        .sell-section {
+            background: #12355b;
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .sell-section h2 {
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .sell-section p {
+            margin-bottom: 25px;
+        }
+
+        .sell-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #ffd166;
+            color: #12355b;
+            padding: 13px 25px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        footer {
+            background: #0d2945;
+            color: white;
+            text-align: center;
+            padding: 25px 20px;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        @media (max-width: 900px) {
+
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .search-box {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .search-box {
+                grid-template-columns: 1fr;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header>
+
+        <div class="header-content">
+
+            <div class="logo">
+                DirectProperty
+            </div>
+
+            <nav>
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="buy.html">
+                    Buy
+                </a>
+
+                <a href="buy.html?mode=rent">
+                    Rent
+                </a>
+
+                <a href="sell-property.html">
+                    Sell Property
+                </a>
+
+                <a href="login.html">
+                    Login
+                </a>
+
+                <a href="register.html">
+                    Register
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         HERO SECTION
+    ========================== -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>
+                Find Your Perfect Property
+            </h1>
+
+            <p>
+                Buy, Sell & Rent Property Directly
+            </p>
+
+
+            <div class="search-box">
+
+                <select id="searchPurpose">
+
+                    <option value="buy">
+                        Buy
+                    </option>
+
+                    <option value="rent">
+                        Rent
+                    </option>
+
+                </select>
+
+
+                <input
+                    type="text"
+                    id="searchLocation"
+                    placeholder="Enter location">
+
+
+                <select id="searchType">
+
+                    <option value="">
+                        Property Type
+                    </option>
+
+                    <option value="Apartment">
+                        Apartment
+                    </option>
+
+                    <option value="House">
+                        House
+                    </option>
+
+                    <option value="Villa">
+                        Villa
+                    </option>
+
+                    <option value="Plot">
+                        Plot
+                    </option>
+
+                </select>
+
+
+                <button
+                    class="search-btn"
+                    onclick="searchProperty()">
+
+                    Search
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FEATURED PROPERTIES
+    ========================== -->
+
+    <section class="section">
+
+        <h2 class="section-title">
+            Explore Properties
+        </h2>
+
+
+        <div class="cards">
+
+
+            <div class="card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+                    alt="Apartment">
+
+                <div class="card-content">
+
+                    <h3>
+                        Apartments
+                    </h3>
+
+                    <p>
+                        Find modern apartments
+                        directly from owners.
+                    </p>
+
+                    <a
+                        href="buy.html"
+                        class="card-btn">
+
+                        Explore
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80"
+                    alt="House">
+
+                <div class="card-content">
+
+                    <h3>
+                        Houses
+                    </h3>
+
+                    <p>
+                        Discover houses available
+                        for sale and rent.
+                    </p>
+
+                    <a
+                        href="buy.html"
+                        class="card-btn">
+
+                        Explore
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80"
+                    alt="Villa">
+
+                <div class="card-content">
+
+                    <h3>
+                        Villas
+                    </h3>
+
+                    <p>
+                        Explore beautiful villas
+                        from property owners.
+                    </p>
+
+                    <a
+                        href="buy.html"
+                        class="card-btn">
+
+                        Explore
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80"
+                    alt="Plot">
+
+                <div class="card-content">
+
+                    <h3>
+                        Plots
+                    </h3>
+
+                    <p>
+                        Find land and plots
+                        directly from owners.
+                    </p>
+
+                    <a
+                        href="buy.html"
+                        class="card-btn">
+
+                        Explore
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         SELL PROPERTY SECTION
+    ========================== -->
+
+    <section class="sell-section">
+
+        <h2>
+            Want to Sell Your Property?
+        </h2>
+
+        <p>
+            List your property directly and
+            connect with buyers without middlemen.
+        </p>
+
+        <a
+            href="sell-property.html"
+            class="sell-btn">
+
+            Post Your Property
+
+        </a>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <p>
+            © 2026 DirectProperty
+        </p>
+
+        <p>
+            Buy, Sell & Rent Property Directly
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        function searchProperty() {
+
+            let purpose =
+                document.getElementById("searchPurpose").value;
+
+            let location =
+                document.getElementById("searchLocation").value.trim();
+
+            let type =
+                document.getElementById("searchType").value;
+
+
+            localStorage.setItem(
+                "homeSearch",
+                JSON.stringify({
+                    purpose: purpose,
+                    location: location,
+                    type: type
+                })
+            );
+
+
+            window.location.href =
+                "buy.html";
+
+        }
+
+
+        document.getElementById("searchLocation")
+            .addEventListener("keypress", function(event) {
+
+                if (event.key === "Enter") {
+
+                    searchProperty();
+
+                }
+
+            });
+
+    </script>
+
+</body>
+
+</html>
